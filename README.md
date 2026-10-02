@@ -31,16 +31,16 @@ dans le navigateur avec `localStorage`.
 
 ## Ajouter sur l'écran d'accueil d'un iPhone
 
-Le site doit être publié sur une adresse HTTPS pour garantir le mode hors ligne
-et l'affichage autonome. Sur l'iPhone:
+Le site est publié sur https://seaaunt97287803.github.io/izoukini-workout/.
+Il utilise HTTPS pour le mode hors ligne et l’affichage autonome. Sur iPhone:
 
 1. Ouvrir l'adresse publiée dans Safari.
 2. Appuyer sur Partager.
 3. Choisir Sur l'écran d'accueil.
 4. Appuyer sur Ajouter.
 
-Le manifeste, les icônes, les métadonnées Apple et le service worker sont déjà
-inclus. Le déploiement public reste une étape séparée.
+Le manifeste, les icônes, les métadonnées Apple et le service worker sont
+inclus dans la publication.
 
 ## Vérifier
 
