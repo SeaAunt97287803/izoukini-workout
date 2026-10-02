@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#050505">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Séance guidée d'environ une heure avec séries, repos et minuteries de planche.">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="IZOUKINI">
+    <title>IZOUKINI WORKOUT · 60 minutes</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icons/icon-180.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="header-glow" aria-hidden="true"></div>
+      <nav class="topbar" aria-label="Actions de la séance">
+        <a class="brand" href="#top" aria-label="Retour au début de la séance">
+          <span class="brand-mark" aria-hidden="true">I</span>
+          <span>IZOUKINI WORKOUT</span>
+        </a>
+        <button class="icon-button" id="install-button" type="button" aria-label="Installer l'application">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4h14v-4" />
+          </svg>
+          <span>Installer</span>
+        </button>
+      </nav>
+
+      <section class="hero" id="top">
+        <p class="eyebrow">ENTRAÎNEMENT COMPLET</p>
+        <h1>Une heure.<br><span>Une séance solide.</span></h1>
+        <p class="hero-copy">Avance une série à la fois. Les temps de repos démarrent automatiquement lorsque tu coches tes progrès.</p>
+
+        <div class="session-strip" aria-label="Durée de la séance">
+          <div>
+            <span class="session-label">TEMPS ÉCOULÉ</span>
+            <strong id="session-time">00:00</strong>
+          </div>
+          <button class="primary-button" id="start-session" type="button">Démarrer la séance</button>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="progress-section" aria-labelledby="progress-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AUJOURD'HUI</p>
+            <h2 id="progress-title">Ta progression</h2>
+          </div>
+          <strong class="progress-percent" id="progress-percent">0%</strong>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-track">
+          <span id="progress-fill"></span>
+        </div>
+        <div class="progress-meta">
+          <span><strong id="sets-progress">0/19</strong> séries</span>
+          <span><strong id="exercises-progress">0/7</strong> exercices</span>
+        </div>
+      </section>
+
+      <section class="workout-section" aria-labelledby="workout-title">
+        <div class="section-heading workout-heading">
+          <div>
+            <p class="eyebrow">PROGRAMME</p>
+            <h2 id="workout-title">Les exercices</h2>
+          </div>
+          <span class="duration-pill">≈ 60 MIN</span>
+        </div>
+        <div class="exercise-list" id="exercise-list"></div>
+      </section>
+
+      <section class="finish-section" aria-labelledby="finish-title">
+        <p class="eyebrow">DERNIÈRE ÉTAPE</p>
+        <h2 id="finish-title">Termine fort.</h2>
+        <p>Quand toutes les séries sont cochées, ta séance est enregistrée sur cet appareil.</p>
+        <button class="secondary-button danger-button" id="reset-workout" type="button">Recommencer la séance</button>
+      </section>
+    </main>
+
+    <aside class="rest-dock" id="rest-dock" aria-live="polite" aria-hidden="true">
+      <div class="rest-ring" id="rest-ring" aria-hidden="true">
+        <span id="rest-time">00:30</span>
+      </div>
+      <div class="rest-copy">
+        <span class="session-label">MINUTEUR DE REPOS</span>
+        <strong id="rest-title">Entre les séries</strong>
+        <span id="rest-status">Respire et prépare la prochaine série.</span>
+      </div>
+      <div class="rest-actions">
+        <button class="small-button" id="pause-rest" type="button">Pause</button>
+        <button class="small-button ghost-button" id="skip-rest" type="button">Passer</button>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <dialog class="install-dialog" id="install-dialog">
+      <form method="dialog">
+        <div class="dialog-icon" aria-hidden="true">↗</div>
+        <p class="eyebrow">SUR IPHONE</p>
+        <h2>Ajoute IZOUKINI WORKOUT à ton écran d'accueil</h2>
+        <ol>
+          <li>Ouvre cette page dans <strong>Safari</strong>.</li>
+          <li>Appuie sur le bouton <strong>Partager</strong> en bas de l'écran.</li>
+          <li>Choisis <strong>Sur l'écran d'accueil</strong>.</li>
+          <li>Appuie sur <strong>Ajouter</strong>.</li>
+        </ol>
+        <button class="primary-button full-button" value="close">J'ai compris</button>
+      </form>
+    </dialog>
+
+    <noscript>Cette application a besoin de JavaScript pour faire fonctionner les minuteries.</noscript>
+
+    <script id="workout-data" type="application/json">
+      {
+        "restBetweenSets": 30,
+        "restBetweenExercises": 120,
+        "exercises": [
+          {
+            "id": "leg-extension",
+            "name": "Extension jambe",
+            "kind": "repetitions",
+            "sets": [
+              { "label": "Série 1", "target": "8–12 répétitions" },
+              { "label": "Série 2", "target": "8–12 répétitions" },
+              { "label": "Série 3", "target": "8–12 répétitions" }
+            ]
+          },
+          {
+            "id": "lat-pulldown",
+            "name": "Tirage vertical (Lat Pulldown)",
+            "kind": "repetitions",
+            "sets": [
+              { "label": "Série 1", "target": "8–12 répétitions" },
+              { "label": "Série 2", "target": "8–12 répétitions" },
+              { "label": "Série 3", "target": "8–12 répétitions" }
+            ]
+          },
+          {
+            "id": "hammer-curl",
+            "name": "Curl marteau haltère",
+            "kind": "repetitions",
+            "sets": [
+              { "label": "Série 1", "target": "8–12 répétitions" },
+              { "label": "Série 2", "target": "8–12 répétitions" },
+              { "label": "Série 3", "target": "8–12 répétitions" }
+            ]
+          },
+          {
+            "id": "lying-triceps-extension",
+            "name": "Extension triceps couché",
+            "kind": "repetitions",
+            "sets": [
+              { "label": "Série 1", "target": "8–12 répétitions" },
+              { "label": "Série 2", "target": "8–12 répétitions" },
+              { "label": "Série 3", "target": "8–12 répétitions" }
+            ]
+          },
+          {
+            "id": "chest-fly",
+            "name": "Chest Fly machine (pectoraux)",
+            "kind": "repetitions",
+            "sets": [
+              { "label": "Série 1", "target": "8–12 répétitions" },
+              { "label": "Série 2", "target": "8–12 répétitions" },
+              { "label": "Série 3", "target": "8–12 répétitions" }
+            ]
+          },
+          {
+            "id": "plank",
+            "name": "Planche",
+            "kind": "timed",
+            "sets": [
+              { "label": "Série 1", "target": "1 min 30", "duration": 90 },
+              { "label": "Série 2", "target": "1 min", "duration": 60 },
+              { "label": "Série 3", "target": "45 secondes", "duration": 45 }
+            ]
+          },
+          {
+            "id": "push-ups",
+            "name": "Push-ups",
+            "kind": "maximum",
+            "sets": [
+              { "label": "Série finale", "target": "Maximum de répétitions" }
+            ]
+          }
+        ]
+      }
+    </script>
+    <script src="app.js" defer></script>
+  </body>
+</html>

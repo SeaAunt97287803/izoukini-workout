@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">IZOUKINI WORKOUT</title>
+  <desc id="description">Lettre I noire devant un cercle vert sur fond noir.</desc>
+  <rect width="512" height="512" rx="112" fill="#050505"/>
+  <circle cx="256" cy="256" r="171" fill="#c9ff3d"/>
+  <path d="M181 130h150v58h-44v136h44v58H181v-58h44V188h-44z" fill="#050505"/>
+</svg>
